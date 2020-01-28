@@ -21,7 +21,11 @@ OBJECTS_SVC = $(SOURCES_SVC.c:%.c=%.o) $(TARGETS_SVC.c:%.c=%.o)
 # Compiler flags 
 
 CFLAGS += -g 
-LDLIBS += -lnsl
+ifeq "$(shell uname)" "Darwin"
+LDLIBS += -L/opt/local/lib -lgsl -v
+else
+LDLIBS += -lnsl -v
+endif
 RPCGENFLAGS = 
 
 # Targets 
